@@ -1,0 +1,48 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Kijitama Prompt Generator — プロトタイプ" Width="1040" Height="800" MinWidth="820" MinHeight="680" WindowStartupLocation="CenterScreen" Background="#F3F6FA" Foreground="#243448" FontFamily="Yu Gothic UI" FontSize="14">
+  <Window.Resources>
+    <Style TargetType="Button"><Setter Property="Padding" Value="16,9"/><Setter Property="Margin" Value="0,0,8,0"/><Setter Property="MinHeight" Value="38"/><Setter Property="Background" Value="White"/><Setter Property="BorderBrush" Value="#DCE3EA"/><Setter Property="Cursor" Value="Hand"/></Style>
+    <Style TargetType="TextBox"><Setter Property="Padding" Value="10"/><Setter Property="BorderBrush" Value="#DCE3EA"/><Setter Property="VerticalContentAlignment" Value="Top"/></Style>
+    <Style TargetType="TabItem"><Setter Property="Padding" Value="18,12"/></Style>
+  </Window.Resources>
+  <Grid Margin="24">
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <DockPanel Margin="0,0,0,20">
+      <Button x:Name="CloseApp" Content="閉じる" DockPanel.Dock="Right"/><Button x:Name="SettingsButton" Content="設定" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+      <StackPanel><TextBlock Text="Kijitama Prompt Generator" FontSize="26" Foreground="#087F78"/><TextBlock Text="画像とプロンプトを、シンプルに。" Foreground="#64748B" Margin="0,4,0,0"/></StackPanel>
+    </DockPanel>
+    <TabControl x:Name="ModeTabs" Grid.Row="1" Background="White" BorderBrush="#DCE3EA">
+      <TabItem Header="プロンプトから画像生成">
+        <StackPanel Margin="18"><TextBlock Text="生成したい画像のプロンプト" FontWeight="SemiBold" Margin="0,0,0,8"/><TextBox x:Name="ImagePrompt" Height="125" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/><TextBlock Text="入力したプロンプトを使って、画像を1枚生成します。" Foreground="#64748B" Margin="0,8,0,0"/></StackPanel>
+      </TabItem>
+      <TabItem Header="プロンプト作成相談">
+        <StackPanel Margin="18"><TextBlock Text="どのような画像を作りたいですか？" FontWeight="SemiBold" Margin="0,0,0,8"/><TextBox x:Name="IdeaPrompt" Height="125" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/><TextBlock Text="例：窓辺で眠る猫。朝の柔らかい光で、水彩画のような雰囲気にしたい。" Foreground="#64748B" Margin="0,8,0,0"/></StackPanel>
+      </TabItem>
+      <TabItem Header="画像からプロンプト生成">
+        <StackPanel Margin="18"><TextBlock Text="PC内の画像パス、または画像そのもののURL" FontWeight="SemiBold" Margin="0,0,0,8"/><DockPanel><Button x:Name="BrowseImage" Content="画像を選択" DockPanel.Dock="Right" Margin="8,0,0,0"/><TextBox x:Name="ReferenceSource" ToolTip="PNG・JPEG・BMPなど。画像を直接表示するhttp/https URLも指定できます。"/></DockPanel><TextBlock Text="追加の希望（任意）" Margin="0,10,0,6"/><TextBox x:Name="ReferencePrompt" Height="60" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/><TextBlock Text="画像の見た目から作成します。元のプロンプトを復元する機能ではありません。" Foreground="#64748B" Margin="0,8,0,0"/></StackPanel>
+      </TabItem>
+      <TabItem x:Name="PromptHistory" Header="生成プロンプト一覧"/>
+      <TabItem x:Name="ImageHistory" Header="生成画像一覧"/>
+    </TabControl>
+    <Grid x:Name="GenerationPanel" Grid.Row="2" Margin="0,16,0,0">
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <DockPanel><StackPanel Orientation="Horizontal"><Button x:Name="GenerateButton" Content="画像を生成" Background="#087F78" Foreground="White"/><Button x:Name="CancelButton" Content="中止" IsEnabled="False"/></StackPanel><TextBlock x:Name="StatusText" Text="入力して生成ボタンを押してください。" TextWrapping="Wrap" VerticalAlignment="Center" Margin="8,0,0,0"/></DockPanel>
+      <ProgressBar x:Name="Progress" Grid.Row="1" Height="3" Margin="0,12,0,12" IsIndeterminate="False"/>
+      <Border Grid.Row="2" Background="White" BorderBrush="#DCE3EA" BorderThickness="1" Padding="12">
+        <Grid><TextBox x:Name="ResultText" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" BorderThickness="0" Text="ここに生成結果が表示されます。"/><Image x:Name="ResultImage" Visibility="Collapsed" Stretch="Uniform"/></Grid>
+      </Border>
+      <WrapPanel Grid.Row="3" Margin="0,12,0,0"><Button x:Name="CopyButton" Content="プロンプトをコピー" IsEnabled="False"/><TextBlock x:Name="CopyNotice" VerticalAlignment="Center" Foreground="#087F78"/><Button x:Name="UseButton" Content="このプロンプトで画像を作る" IsEnabled="False"/><Button x:Name="OpenFolderButton" Content="保存フォルダーを開く"/></WrapPanel>
+    </Grid>
+    <Border x:Name="InfoPage" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed" Background="White" BorderBrush="#DCE3EA" BorderThickness="1" Padding="18">
+      <DockPanel>
+        <DockPanel DockPanel.Dock="Top"><Button x:Name="BackFromInfo" Content="戻る" DockPanel.Dock="Right"/><TextBlock x:Name="InfoTitle" FontSize="24" Foreground="#087F78" VerticalAlignment="Center"/></DockPanel>
+        <Grid><Grid x:Name="HelpContent" Visibility="Collapsed"/><Grid x:Name="LicenseContent" Visibility="Collapsed"/></Grid>
+      </DockPanel>
+    </Border>
+    <DockPanel Grid.Row="3" Margin="0,14,0,0">
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+        <Button x:Name="HelpButton" Content="ヘルプ"/><Button x:Name="LicenseButton" Content="ライセンス" Margin="0"/>
+      </StackPanel>
+      <TextBlock Text="結果は自動保存されます。入力内容・参照画像はCodexに送信されます。利用枠は接続先の契約に従います。" Foreground="#64748B" FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,12,0"/>
+    </DockPanel>
+  </Grid>
+</Window>

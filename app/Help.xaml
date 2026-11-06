@@ -1,0 +1,28 @@
+<ScrollViewer xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,10,0,0">
+  <ScrollViewer.Resources>
+    <Style TargetType="TextBlock"><Setter Property="TextWrapping" Value="Wrap"/><Setter Property="Margin" Value="0,2,0,4"/></Style>
+    <Style x:Key="Section" TargetType="TextBlock" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"><Setter Property="FontSize" Value="17"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Foreground" Value="#087F78"/><Setter Property="Margin" Value="0,14,0,4"/></Style>
+  </ScrollViewer.Resources>
+  <StackPanel Margin="0,0,16,10">
+    <TextBlock Style="{StaticResource Section}" Text="プロンプトから画像生成"/>
+    <TextBlock Text="入力したプロンプトから画像を1枚作ります。描きたい内容を入力し、「画像を生成」を押します。完成した画像は自動保存され、「保存フォルダーを開く」で確認できます。"/>
+
+    <TextBlock Style="{StaticResource Section}" Text="プロンプト作成相談"/>
+    <TextBlock Text="作りたい画像のイメージを、画像生成用の文章にまとめます。「朝の窓辺で眠る猫を水彩画風に」など、希望を入力して「プロンプトを生成」を押します。画像も作りたい場合は「このプロンプトで画像を作る」を押し、内容を確認して「画像を生成」を押します。"/>
+
+    <TextBlock Style="{StaticResource Section}" Text="画像からプロンプト生成"/>
+    <TextBlock Text="画像の構図や色、画風を再現するためのプロンプトを作ります。「画像を選択」でPC内の画像を選ぶか、画像を直接表示するURLを入力します。追加の希望があれば記入し、「プロンプトを生成」を押します。"/>
+
+    <TextBlock Style="{StaticResource Section}" Text="生成プロンプト一覧"/>
+    <TextBlock Text="現在の保存先にあるプロンプトを新しい順に表示します。一覧から選ぶと全文が表示され、「プロンプトをコピー」でコピーできます。「キーワード検索」は本文を絞り込みます。複数の語をスペースで区切ると、すべての語を含む結果が表示されます。"/>
+
+    <TextBlock Style="{StaticResource Section}" Text="生成画像一覧"/>
+    <TextBlock Text="サムネイルを選ぶと、生成画像と、その画像に使ったプロンプトを確認できます。「キーワード検索」でプロンプトの文章を検索し、「クリア」で全件表示に戻します。"/>
+
+    <TextBlock Style="{StaticResource Section}" Text="設定"/>
+    <TextBlock><Bold>保存先</Bold>　右上の「設定」を開き、「生成結果の保存先」の「参照…」でフォルダーを選んで「保存」を押します。初期の保存先は、exeと同じ場所のdataフォルダーです。</TextBlock>
+    <TextBlock><Bold>保存先の変更</Bold>　「現在の情報をコピーしますか？」で「はい」を選ぶと、元のデータを残し、コピー完了後に保存先が切り替わります。「いいえ」は保存先だけを変更し、「キャンセル」は設定画面に戻ります。</TextBlock>
+    <TextBlock><Bold>Codexのパス</Bold>　「自動検出」を押すか、「参照…」からCodex CLIのcodex.exeを選び、「保存」を押します。</TextBlock>
+    <TextBlock><Bold>設定の初期化</Bold>　「設定を初期化」を押すと、保存した設定を消去してアプリを終了します。生成済みのファイルは保持されます。</TextBlock>
+  </StackPanel>
+</ScrollViewer>

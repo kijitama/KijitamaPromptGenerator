@@ -1,0 +1,6 @@
+settings.json
+/IconProposals/
+output/
+tests/run-*/
+tests/live-*/
+tests/*-preview.png
