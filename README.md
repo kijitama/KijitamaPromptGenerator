@@ -1,0 +1,2 @@
+# KijitamaPromptGenerator
+画像からプロンプトを生成するWindows用のアプリです。
