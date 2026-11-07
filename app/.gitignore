@@ -1,5 +1,6 @@
 settings.json
 /IconProposals/
+/release/
 output/
 tests/run-*/
 tests/live-*/
